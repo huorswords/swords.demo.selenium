@@ -1,0 +1,18 @@
+version: '2.2'
+services: 
+    hub:
+      image: "selenium.azurecr.io/hub:v1"
+      ports:
+        - "4444:4444"
+      
+    chrome-node:
+      image: "selenium.azurecr.io/node-chrome:v1"
+      environment:
+            HUB_PORT_4444_TCP_ADDR: hub
+            HUB_PORT_4444_TCP_PORT: 4444
+
+    ff-node:
+      image: "selenium.azurecr.io/node-firefox:v1"
+      environment:
+            HUB_PORT_4444_TCP_ADDR: hub
+            HUB_PORT_4444_TCP_PORT: 4444
