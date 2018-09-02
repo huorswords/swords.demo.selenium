@@ -1,18 +1,24 @@
-version: '2.2'
-services: 
-    hub:
-      image: "selenium.azurecr.io/hub:v1"
-      ports:
-        - "4444:4444"
-      
-    chrome-node:
-      image: "selenium.azurecr.io/node-chrome:v1"
-      environment:
-            HUB_PORT_4444_TCP_ADDR: hub
-            HUB_PORT_4444_TCP_PORT: 4444
-
-    ff-node:
-      image: "selenium.azurecr.io/node-firefox:v1"
-      environment:
-            HUB_PORT_4444_TCP_ADDR: hub
-            HUB_PORT_4444_TCP_PORT: 4444
+# To execute this docker-compose yml file use `docker-compose -f <file_name> up`
+# Add the `-d` flag at the end for detached execution
+version: "3"
+services:
+  selenium-hub:
+    image: selenium/hub
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    shm_size: '2gb'
+  chrome:
+    image: selenium/node-chrome
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+  firefox:
+    image: selenium/node-firefox
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444

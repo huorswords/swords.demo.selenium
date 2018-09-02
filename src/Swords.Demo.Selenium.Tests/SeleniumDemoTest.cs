@@ -8,8 +8,9 @@ namespace Swords.Demo.SeleniumDemo.Tests
 
 	using OpenQA.Selenium;
 	using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Firefox;
 
-	[TestClass]
+    [TestClass]
 	public class SeleniumDemoTest
 	{
 		protected IWebDriver webDriver;
@@ -55,8 +56,11 @@ namespace Swords.Demo.SeleniumDemo.Tests
 						  .GoToUrl("http://www.google.com");
 
 			IWebElement searchBox = this.webDriver.FindElement(By.Name("q"));
+            searchBox.Click();
+            searchBox.Clear();
 			searchBox.SendKeys(TextToSearch);
 			searchBox.Submit();
+            Thread.Sleep(1000);
 		}
 	}
 }
