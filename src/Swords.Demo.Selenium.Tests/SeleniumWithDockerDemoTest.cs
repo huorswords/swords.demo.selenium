@@ -1,8 +1,8 @@
 ﻿namespace Swords.Demo.SeleniumDemo.Tests
 {
 	using System;
-
-	using Microsoft.Extensions.Configuration;
+    using System.Diagnostics;
+    using Microsoft.Extensions.Configuration;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using OpenQA.Selenium.Remote;
 
@@ -25,7 +25,11 @@
 			var seleniumOptions = new SeleniumOptions();
 			configuration.Bind("SeleniumDockerHost", seleniumOptions);
 
-			this.webDriver = new RemoteWebDriver(
+            Trace.WriteLine($"{seleniumOptions.Host}");
+            Trace.WriteLine($"{seleniumOptions.Port}");
+            Trace.WriteLine($"{seleniumOptions.BrowserName}");
+
+            this.webDriver = new RemoteWebDriver(
 				seleniumOptions.WebDriverUri,
 				seleniumOptions.DriverOptions);
 		}
