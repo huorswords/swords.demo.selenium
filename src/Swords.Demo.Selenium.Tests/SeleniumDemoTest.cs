@@ -26,7 +26,7 @@ namespace Swords.Demo.SeleniumDemo.Tests
 		[TestMethod]
 		public void Google_Should_ShowMyWebPageFirst_When_LookingForSpecificUrl()
 		{
-			const string ExpectedWebTitle = "Soy Ángel.G";
+			const string ExpectedWebTitle = "ngel.G";
 			const string TextToSearch = "huorswords.github.io";
 
 			// 1. Navigate and search on Google
@@ -38,7 +38,7 @@ namespace Swords.Demo.SeleniumDemo.Tests
 												  .First()
 												  .FindElement(By.ClassName("r"));
 
-			Assert.AreEqual(ExpectedWebTitle, searchFirstResult.Text);
+            StringAssert.Contains(searchFirstResult.Text, ExpectedWebTitle);
 
 			// 3. Navigate (by click) to first Google search result.
 			searchFirstResult.FindElement(By.CssSelector("a"))
