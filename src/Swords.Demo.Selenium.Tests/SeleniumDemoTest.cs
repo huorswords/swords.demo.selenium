@@ -21,7 +21,10 @@ namespace Swords.Demo.SeleniumDemo.Tests
 
 		[TestCleanup]
 		public virtual void Cleanup()
-			=> this.webDriver?.Close();
+		{
+			this.webDriver?.Close();
+			this.webDriver?.Quit();
+		}
 
 		[TestMethod]
 		public void Google_Should_ShowMyWebPageFirst_When_LookingForSpecificUrl()
@@ -60,7 +63,7 @@ namespace Swords.Demo.SeleniumDemo.Tests
             searchBox.Clear();
 			searchBox.SendKeys(TextToSearch);
 			searchBox.Submit();
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
 		}
 	}
 }
